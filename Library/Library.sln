@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		docker-compose.yaml = docker-compose.yaml
 		prometheus.yml = prometheus.yml
 		postgres-pvc.yml = postgres-pvc.yml
+		postgres-deployment.yml = postgres-deployment.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{35BA24CD-7E36-4445-AE20-4DFEA495BDE9}"
