@@ -57,6 +57,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yarp", "yarp", "{197D42AD-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Yarp", "Gateway.Yarp\Gateway.Yarp.csproj", "{1A8BE66B-1F33-4101-A716-CED8A5E9BCDD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "md", "md", "{EE9B3375-7026-49AE-B52C-B436302FE7F9}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesTerms.md = KubernetesTerms.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
