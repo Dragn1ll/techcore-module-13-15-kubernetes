@@ -27,6 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
 		prometheus.yml = prometheus.yml
+		postgres-pvc.yml = postgres-pvc.yml
+		postgres-deployment.yml = postgres-deployment.yml
+		postgres-service.yml = postgres-service.yml
+		book-service-deployment.yml = book-service-deployment.yml
+		book-service-service.yml = book-service-service.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{35BA24CD-7E36-4445-AE20-4DFEA495BDE9}"
@@ -56,6 +61,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yarp", "yarp", "{197D42AD-0E61-459A-95F8-C50D00533526}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Yarp", "Gateway.Yarp\Gateway.Yarp.csproj", "{1A8BE66B-1F33-4101-A716-CED8A5E9BCDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "md", "md", "{EE9B3375-7026-49AE-B52C-B436302FE7F9}"
+	ProjectSection(SolutionItems) = preProject
+		KubernetesTerms.md = KubernetesTerms.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
