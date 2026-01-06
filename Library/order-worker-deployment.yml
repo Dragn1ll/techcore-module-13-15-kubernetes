@@ -1,44 +1,35 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: book-service
+  name: order-worker
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: book-service
+      app: order-worker
   template:
     metadata:
       labels:
-        app: book-service
+        app: order-worker
     spec:
       containers:
-        - name: book-service
-          image: book-service:k8s
+        - name: order-worker
+          image: order-worker:k8s
           imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Production
           envFrom:
             - secretRef:
                 name: postgres-secret
-          volumeMounts:
-            - name: config-volume
-              mountPath: /app/config
-      volumes:
-        - name: config-volume
-          configMap:
-            name: book-service-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: book-service-service
+  name: order-worker-service
 spec:
   selector:
-    app: book-service
+    app: order-worker
   ports:
     - port: 80
       targetPort: 8080
