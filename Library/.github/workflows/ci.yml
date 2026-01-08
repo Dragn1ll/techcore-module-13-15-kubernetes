@@ -1,4 +1,4 @@
-﻿name: CI Build & Test
+﻿name: CI Build & Test & Push
 
 on:
   push:
@@ -25,10 +25,51 @@ jobs:
     - name: Run Tests (xUnit)
       run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
       
-    - name: Build Docker Images
-      run: |
-        minikube docker-env | bash # для Minikube (опционально)
-        docker build -t book-service:k8s -f ./Library.Web/Dockerfile .
-        docker build -t gateway:k8s -f ./Gateway/Dockerfile .
-        docker build -t order-worker:k8s -f ./OrderWorkerService/Dockerfile .
-        docker build -t analitycs-worker:k8s -f ./AnaliticsWorker/Dockerfile .
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    - name: Build and Push BookService
+      uses: docker/build-push-action@v6
+      with:
+        context: ./Library.Web
+        file: ./Library.Web/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          my-user/book-service:latest
+          my-user/book-service:${{ github.sha }}
+          
+    - name: Build and Push Gateway
+      uses: docker/build-push-action@v6
+      with:
+        context: ./Gateway
+        file: ./Gateway/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          my-user/gateway:latest
+          my-user/gateway:${{ github.sha }}
+        
+    - name: Build and Push OrderService
+      uses: docker/build-push-action@v6
+      with:
+        context: ./OrderWorkerService
+        file: ./OrderWorkerService/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          my-user/order-service:latest
+          my-user/order-service:${{ github.sha }}
+        
+    - name: Build and Push AnalyticsService
+      uses: docker/build-push-action@v6
+      with:
+        context: ./AnalyticsService
+        file: ./AnalyticsService/Dockerfile
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          my-user/analytics-service:latest
+          my-user/analytics-service:${{ github.sha }}
