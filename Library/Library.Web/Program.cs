@@ -8,6 +8,7 @@ using Library.Web.BackgroundServices;
 using Library.Web.Extensions;
 using Library.Web.Options;
 using Microsoft.Extensions.Options;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -49,6 +50,11 @@ public class Program
                     ResourceBuilder.CreateDefault().AddService("book-service"))
                 .AddAspNetCoreInstrumentation()
                 .AddHttpClientInstrumentation()
+                .AddJaegerExporter(options =>
+                {
+                    options.Endpoint = new Uri("http://jaeger-tracing.svc.cluster.local:14268/api/traces");
+                    options.Protocol = JaegerExportProtocol.HttpBinaryThrift;
+                })
                 .AddZipkinExporter(o =>
                 {
                     o.Endpoint = new Uri("http://zipkin:9411/api/v2/spans");

@@ -1,6 +1,7 @@
 using Library.Data.PostgreSql;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -40,6 +41,11 @@ builder.ConfigureServices((hostContext, services) =>
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddSource("MassTransit")
+            .AddJaegerExporter(options =>
+            {
+                options.Endpoint = new Uri("http://jaeger-tracing.svc.cluster.local:14268/api/traces");
+                options.Protocol = JaegerExportProtocol.HttpBinaryThrift;
+            })
             .AddZipkinExporter(o =>
             {
                 o.Endpoint = new Uri("http://zipkin:9411/api/v2/spans");
