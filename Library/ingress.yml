@@ -2,6 +2,11 @@
 kind: Ingress
 metadata:
   name: my-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "v2"
 spec:
   rules:
     - host: my-app.local
