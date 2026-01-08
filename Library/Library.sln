@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		postgres-service.yml = postgres-service.yml
 		book-service-deployment.yml = book-service-deployment.yml
 		book-service-service.yml = book-service-service.yml
+		gateway-deployment.yml = gateway-deployment.yml
+		order-worker-deployment.yml = order-worker-deployment.yml
+		analytics-worker-deployment.yml = analytics-worker-deployment.yml
+		ingress.yml = ingress.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{35BA24CD-7E36-4445-AE20-4DFEA495BDE9}"

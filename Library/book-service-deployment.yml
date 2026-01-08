@@ -27,7 +27,34 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /app/config
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
       volumes:
         - name: config-volume
           configMap:
             name: book-service-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-service-service
+spec:
+  selector:
+    app: book-service
+  ports:
+    - port: 80
+      targetPort: 8080
