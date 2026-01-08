@@ -2,6 +2,8 @@
 kind: Service
 metadata:
   name: book-service-service
+  labels:
+    app: book-service
 spec:
   type: NodePort
   selector:
